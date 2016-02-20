@@ -48,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
         client = new ClarifaiClient(Credential.CLIENT_ID, Credential.CLIENT_SECRET);
 
         Bitmap bitmapSelected = getBitmapFromAsset(getApplicationContext(),"kitten.jpeg");
+
+        //enable to send image
+        //sendImageToClarifai(bitmapSelected);
+
+
+    }
+
+    private void sendImageToClarifai(Bitmap bitmapSelected) {
         Log.d("Clarifai", "start");
         new AsyncTask<Bitmap,Void,RecognitionResult>() {
             @Override
@@ -61,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }.execute(bitmapSelected);
-
-
-
     }
 
     public static Bitmap getBitmapFromAsset(Context context, String filePath) {
