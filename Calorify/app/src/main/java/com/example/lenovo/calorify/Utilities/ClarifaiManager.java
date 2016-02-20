@@ -10,12 +10,15 @@ import android.util.Log;
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
 import com.clarifai.api.RecognitionResult;
+import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
 import com.example.lenovo.calorify.Authentication.Credential;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by michal on 2/20/2016.
@@ -55,7 +58,19 @@ public class ClarifaiManager {
             }
             @Override protected void onPostExecute(RecognitionResult result) {
                 //
+
+                ArrayList<Food> foodArrayList = new ArrayList<>();
+                for (Tag tag :result.getTags())
+                {
+                    Food newFood = new Food();
+                    newFood.name = tag.getName();
+                    foodArrayList.add(newFood);
+                }
+
+                
+
                 Log.d(TAG_C,result.getTags().toString());
+
             }
 
         }.execute(bitmapSelected);
