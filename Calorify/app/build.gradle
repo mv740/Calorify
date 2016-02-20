@@ -24,6 +24,7 @@ dependencies {
     compile 'net.bozho.easycamera:easycamera:0.0.1:aar@aar'
     compile 'com.sothree.slidinguppanel:library:3.2.1'
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.clarifai:clarifai-api-java:1.2.0'

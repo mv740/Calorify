@@ -34,6 +34,7 @@ import net.bozho.easycamera.EasyCamera;
 
 
 import com.example.lenovo.calorify.Utilities.CaloriesListAdapter;
+import com.example.lenovo.calorify.Utilities.GoogleSearch;
 import com.example.lenovo.calorify.Utilities.ClarifaiManager;
 
 import net.bozho.easycamera.DefaultEasyCamera;
@@ -77,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
-        startCamera();
+        //startCamera();
+        GoogleSearch search = new GoogleSearch();
+        search.search(this);
     }
 
      @Override
