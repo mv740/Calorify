@@ -1,12 +1,15 @@
 package com.example.lenovo.calorify;
 
+import android.app.Activity;
 import android.content.Context;
+import android.media.MediaRecorder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -51,9 +54,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EasyCamera camera;
     SurfaceView surface;
     SurfaceHolder holder;
+    Button buttonClick;
+    Camera camera;
+    Activity activity;
+    Context context;
+    Preview preview;
 
     private final String TAG_C = "Clarifai";
 
@@ -67,8 +74,19 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap bitmapSelected = getBitmapFromAsset(getApplicationContext(),"kitten.jpeg");
 
+        context = getApplicationContext();
+        surface = (SurfaceView) findViewById(R.id.camContainer);
+        preview = new Preview(context, surface);
+
+        int camId = findCameraId();
+        safeCameraOpen(camId);
+
+
+
         //enable to send image
         //sendImageToClarifai(bitmapSelected);
+
+
 
  populateCaloriesList();
 
@@ -77,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
-        startCamera();
+
     }
 
     private void sendImageToClarifai(Bitmap bitmapSelected) {
@@ -173,7 +191,43 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void startCamera(){
+    private boolean safeCameraOpen(int id) {
+        boolean qOpened = false;
+
+        try {
+            releaseCameraAndPreview();
+            camera = Camera.open(id);
+            qOpened = (camera != null);
+        } catch (Exception e) {
+            Log.e(getString(R.string.app_name), "failed to open Camera");
+            e.printStackTrace();
+        }
+        return qOpened;
+    }
+
+    private void releaseCameraAndPreview() {
+        preview.setCamera(camera);
+        if (camera != null) {
+            camera.release();
+            camera = null;
+        }
+    }
+
+    private int findCameraId(){
+        int cameraId = -1;
+        int numberOfCameras = Camera.getNumberOfCameras();
+        for (int i = 0; i < numberOfCameras; i++) {
+            Camera.CameraInfo info = new Camera.CameraInfo();
+            Camera.getCameraInfo(i, info);
+            if (info.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                cameraId = i;
+            }
+        } return cameraId;
+    }
+
+
+
+   /* public void startCamera(){
 
         RelativeLayout v = (RelativeLayout) findViewById(R.id.camContainer);
         surface = new SurfaceView(getApplicationContext());
@@ -197,6 +251,6 @@ public class MainActivity extends AppCompatActivity {
                 // store picture
             }
         };
-        actions.takePicture(EasyCamera.Callbacks.create().withJpegCallback(callback));
-    }
+        //actions.takePicture(EasyCamera.Callbacks.create().withJpegCallback(callback));
+    }*/
 }

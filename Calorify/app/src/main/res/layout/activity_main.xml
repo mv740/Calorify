@@ -8,11 +8,16 @@
         tools:context="com.example.lenovo.calorify.MainActivity"
         android:gravity="bottom" >
 
-        <RelativeLayout android:id="@+id/camContainer"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <SurfaceView
+            android:id="@+id/camContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </RelativeLayout>
+        </SurfaceView>
 
+    </FrameLayout>
         <include layout="@layout/cal_more_info"/>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
