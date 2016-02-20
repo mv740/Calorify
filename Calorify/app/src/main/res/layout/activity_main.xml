@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout
-        android:id="@+id/sliding_layout"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.lenovo.calorify.MainActivity"
-        android:gravity="bottom" >
+<com.sothree.slidinguppanel.SlidingUpPanelLayout
+    android:id="@+id/sliding_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lenovo.calorify.MainActivity"
+    android:gravity="bottom">
 
         <RelativeLayout android:id="@+id/camContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+                android:id="@+id/indeterminate_progress_large_library"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:indeterminate="true"
+                android:tint="@color/calorify_default"
+                style="@style/Widget.MaterialProgressBar.ProgressBar.Large" />
         </RelativeLayout>
 
         <include layout="@layout/cal_more_info"/>
