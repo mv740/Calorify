@@ -23,7 +23,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EasyCamera camera;
+    EasyCamera camera;
     SurfaceView surface;
     SurfaceHolder holder;
 
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );
+        startCamera();
     }
 
     @Override
@@ -97,12 +98,12 @@ public class MainActivity extends AppCompatActivity {
         RelativeLayout v = (RelativeLayout) findViewById(R.id.camContainer);
         surface = new SurfaceView(getApplicationContext());
         holder = surface.getHolder();
+
         v.addView(surface);
 
 
 
         camera = DefaultEasyCamera.open();
-        camera.getRawCamera();
         EasyCamera.CameraActions actions = null;
         try {
             actions = camera.startPreview(holder);
