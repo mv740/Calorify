@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayCaloriesList() {
         TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
-        ScrollView caloriesListContainer = (ScrollView) findViewById(R.id.caloriesListContainer);
+        ListView caloriesListContainer = (ListView) findViewById(R.id.caloriesList);
         taskDescription.setVisibility(View.GONE);
         caloriesListContainer.setVisibility(View.VISIBLE);
     }
