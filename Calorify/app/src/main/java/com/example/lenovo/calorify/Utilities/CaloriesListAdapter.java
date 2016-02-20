@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.lenovo.calorify.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by NSPACE on 2016-02-09.
  */

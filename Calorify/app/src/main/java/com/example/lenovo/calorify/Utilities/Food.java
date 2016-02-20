@@ -7,4 +7,5 @@ public class Food {
 
     public String name;
     public String calories;
+    public int index;
 }

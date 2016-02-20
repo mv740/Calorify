@@ -13,6 +13,7 @@ import com.clarifai.api.RecognitionResult;
 import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
 import com.example.lenovo.calorify.Authentication.Credential;
+import com.example.lenovo.calorify.MainActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class ClarifaiManager {
         return bitmap;
     }
 
-    public void sendImageToClarifai(Bitmap bitmapSelected) {
+    public void sendImageToClarifai(final MainActivity activity, Bitmap bitmapSelected) {
         Log.d("Clarifai", "start");
         new AsyncTask<Bitmap,Void,RecognitionResult>() {
             @Override
@@ -64,12 +65,14 @@ public class ClarifaiManager {
                 {
                     Food newFood = new Food();
                     newFood.name = tag.getName();
+                    newFood.index = foodArrayList.size();
                     foodArrayList.add(newFood);
                 }
 
-                
 
                 Log.d(TAG_C,result.getTags().toString());
+
+                activity.initGoogleSearch(foodArrayList);
 
             }
 

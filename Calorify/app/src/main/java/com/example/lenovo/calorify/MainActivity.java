@@ -34,6 +34,7 @@ import net.bozho.easycamera.EasyCamera;
 
 
 import com.example.lenovo.calorify.Utilities.CaloriesListAdapter;
+import com.example.lenovo.calorify.Utilities.Food;
 import com.example.lenovo.calorify.Utilities.GoogleSearch;
 import com.example.lenovo.calorify.Utilities.ClarifaiManager;
 
@@ -49,6 +50,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
     EasyCamera camera;
     SurfaceView surface;
     SurfaceHolder holder;
+    public ArrayList<Food> foods;
 
 
     private ClarifaiClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmapSelected = clarifaiManager.getBitmapFromAsset(getApplicationContext(), "kitten.jpeg");
 
         //enable to send image
-        clarifaiManager.sendImageToClarifai(bitmapSelected);
+        clarifaiManager.sendImageToClarifai(this, bitmapSelected);
 
- populateCaloriesList();
+        //populateCaloriesList();
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
                         .setDefaultFontPath("fonts/brainflower.ttf")
@@ -79,19 +83,18 @@ public class MainActivity extends AppCompatActivity {
                         .build()
         );
         //startCamera();
-        GoogleSearch search = new GoogleSearch();
-        search.search(this);
+
     }
 
-     @Override
+    @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 
-    private void buildCaloriesList(String[] foodNames, String[] calNums){
+    private void buildCaloriesList(String[] foodNames, String[] calNums) {
         CaloriesListAdapter adapter = new CaloriesListAdapter(MainActivity.this, foodNames, calNums);
-        ListView list = (ListView)findViewById(R.id.caloriesList);
+        ListView list = (ListView) findViewById(R.id.caloriesList);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -102,37 +105,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        togglePanelContent();
+        displayCaloriesList();
     }
 
-    private void populateCaloriesList(){
-        String[] foodNames = {"salut1", "salut2", "salut3"};
-        String[] calNums = {"100", "200", "300"};
+    private void displayCaloriesList() {
+        TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
+        ScrollView caloriesListContainer = (ScrollView) findViewById(R.id.caloriesListContainer);
+        taskDescription.setVisibility(View.GONE);
+        caloriesListContainer.setVisibility(View.VISIBLE);
+    }
+
+    private void updateCaloriesList() {
+        ArrayList<String> foodNamesAL = new ArrayList<>();
+        ArrayList<String> calNumsAL = new ArrayList<>();
+
+        for (Food food : foods) {
+            foodNamesAL.add(food.name);
+            calNumsAL.add(food.calories);
+        }
+
+        String[] foodNames = foodNamesAL.toArray(new String[0]);
+        String[] calNums = calNumsAL.toArray(new String[0]);
+
         buildCaloriesList(foodNames, calNums);
     }
 
-    private void togglePanelContent(){
-        TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
-        ScrollView caloriesListContainer = (ScrollView) findViewById(R.id.caloriesListContainer);
+    public void updateFoods(Food food){
+       this.foods.set(food.index, food);
+        updateCaloriesList();
+    }
 
-        if (taskDescription.getVisibility() == View.VISIBLE) {
-            taskDescription.setVisibility(View.GONE);
-            caloriesListContainer.setVisibility(View.VISIBLE);
-        }
-        else{
-            taskDescription.setVisibility(View.VISIBLE);
-            caloriesListContainer.setVisibility(View.GONE);
+    public void initGoogleSearch(ArrayList<Food> foods){
+        this.foods = foods;
+        GoogleSearch search = new GoogleSearch(this);
+        for (Food food : this.foods){
+            search.howManyCalories(food);
         }
     }
 
-    public void startCamera(){
+
+    public void startCamera() {
 
         RelativeLayout v = (RelativeLayout) findViewById(R.id.camContainer);
         surface = new SurfaceView(getApplicationContext());
         holder = surface.getHolder();
 
         v.addView(surface);
-
 
 
         camera = DefaultEasyCamera.open();
