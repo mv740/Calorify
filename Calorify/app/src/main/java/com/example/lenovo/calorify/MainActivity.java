@@ -34,6 +34,7 @@ import net.bozho.easycamera.EasyCamera;
 
 
 import com.example.lenovo.calorify.Utilities.CaloriesListAdapter;
+import com.example.lenovo.calorify.Utilities.ClarifaiManager;
 
 import net.bozho.easycamera.DefaultEasyCamera;
 import net.bozho.easycamera.EasyCamera;
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     SurfaceView surface;
     SurfaceHolder holder;
 
-    private final String TAG_C = "Clarifai";
 
     private ClarifaiClient client;
     @Override
@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        client = new ClarifaiClient(Credential.CLIENT_ID, Credential.CLIENT_SECRET);
+        ClarifaiManager clarifaiManager = new ClarifaiManager();
 
-        Bitmap bitmapSelected = getBitmapFromAsset(getApplicationContext(),"kitten.jpeg");
+        Bitmap bitmapSelected = clarifaiManager.getBitmapFromAsset(getApplicationContext(), "kitten.jpeg");
 
         //enable to send image
-        //sendImageToClarifai(bitmapSelected);
+        clarifaiManager.sendImageToClarifai(bitmapSelected);
 
  populateCaloriesList();
 
@@ -78,57 +78,6 @@ public class MainActivity extends AppCompatActivity {
                         .build()
         );
         startCamera();
-    }
-
-    private void sendImageToClarifai(Bitmap bitmapSelected) {
-        Log.d("Clarifai", "start");
-        new AsyncTask<Bitmap,Void,RecognitionResult>() {
-            @Override
-            protected RecognitionResult doInBackground(Bitmap[] bitmaps) {
-                Log.d(TAG_C, "doInBackground");
-                return recognizeFile(bitmaps[0]);
-            }
-            @Override protected void onPostExecute(RecognitionResult result) {
-                //
-                Log.d(TAG_C,result.getTags().toString());
-            }
-
-        }.execute(bitmapSelected);
-    }
-
-    public static Bitmap getBitmapFromAsset(Context context, String filePath) {
-        AssetManager assetManager = context.getAssets();
-
-        InputStream istr;
-        Bitmap bitmap = null;
-        try {
-            istr = assetManager.open(filePath);
-            bitmap = BitmapFactory.decodeStream(istr);
-        } catch (IOException e) {
-            // handle exception
-        }
-        Log.d("getBitmapFromAsset", "processed");
-        return bitmap;
-    }
-
-    /** Sends the given bitmap to Clarifai for recognition and returns the result. */
-    private RecognitionResult recognizeFile(Bitmap bitmap) {
-        try {
-            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 320,
-                    320 * bitmap.getHeight() / bitmap.getWidth(), true);
-
-            // Compress the image as a JPEG.
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            scaled.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            byte[] jpeg = out.toByteArray();
-
-            Log.d(TAG_C, "send msg");
-            // Send the file to Clarifai and return the result.
-            return client.recognize(new RecognitionRequest(jpeg)).get(0);
-        } catch (ClarifaiException e) {
-            Log.e(TAG_C, "Clarifai error", e);
-            return null;
-        }
     }
 
      @Override
