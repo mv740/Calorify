@@ -29,19 +29,22 @@ public class GoogleSearch {
 
 
     public void howManyCalories(final Food food) {
-
-            String url = "https://www.google.ca/search?site=webhp&source=hp&q=how+many+calories+in+" + food.name;
-        Log.v("FOODNAME", food.name);
+        //to make it compatible with web parameters
+        String toSearch = food.name.replaceAll(" ", "+");
+            String url = "https://www.google.ca/search?site=webhp&source=hp&q=how+many+calories+in+" + toSearch;
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
-                            int cals = findCalsInSearchResponse(response);
-                            food.calories = Integer.toString(cals);
-
+                            if (food.name.equals("cola")){
+                                Log.v("","");
+                            }
+                            food.calories = findCalsInSearchResponse(response);
+                            food.grams = findGramsInSearchResponse(response);
                             activity.updateFoods(food);
+
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -66,6 +69,19 @@ public class GoogleSearch {
         }
 
         return cals;
+    }
+    private int findGramsInSearchResponse(String response){
+        int grams = 0;
+        String token = "</option><option selected=\"selected\" value=\"";
+        int index = response.indexOf(token) + token.length();
+        String numOfCals = response.substring(index, index+11);
+        if (numOfCals.contains("grams")){
+            //then it is food
+            String numOfCalsInInt = numOfCals.replaceAll("[^0-9]", "");
+            grams = Integer.valueOf(numOfCalsInInt);
+        }
+
+        return grams;
     }
 
 }

@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void buildCaloriesList(String[] foodNames, String[] calNums) {
-        CaloriesListAdapter adapter = new CaloriesListAdapter(MainActivity.this, foodNames, calNums);
+    private void buildCaloriesList(String[] foodNames, String[] calNums, String[] gramNums) {
+        CaloriesListAdapter adapter = new CaloriesListAdapter(MainActivity.this, foodNames, calNums, gramNums);
         ListView list = (ListView) findViewById(R.id.caloriesList);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayCaloriesList() {
         TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
-        ScrollView caloriesListContainer = (ScrollView) findViewById(R.id.caloriesListContainer);
+        ListView caloriesListContainer = (ListView) findViewById(R.id.caloriesList);
         taskDescription.setVisibility(View.GONE);
         caloriesListContainer.setVisibility(View.VISIBLE);
     }
@@ -118,27 +118,33 @@ public class MainActivity extends AppCompatActivity {
     private void updateCaloriesList() {
         ArrayList<String> foodNamesAL = new ArrayList<>();
         ArrayList<String> calNumsAL = new ArrayList<>();
+        ArrayList<String> gramNumsAL = new ArrayList<>();
 
         for (Food food : foods) {
-            foodNamesAL.add(food.name);
-            calNumsAL.add(food.calories);
+            if (food.calories > 0) {
+                foodNamesAL.add(food.name);
+                calNumsAL.add(String.valueOf(food.calories));
+                gramNumsAL.add(String.valueOf(food.grams));
+            }
         }
 
         String[] foodNames = foodNamesAL.toArray(new String[0]);
         String[] calNums = calNumsAL.toArray(new String[0]);
+        String[] gramNums = gramNumsAL.toArray(new String[0]);
 
-        buildCaloriesList(foodNames, calNums);
+        buildCaloriesList(foodNames, calNums, gramNums);
     }
 
-    public void updateFoods(Food food){
-       this.foods.set(food.index, food);
+    public void updateFoods(Food food) {
+
+        this.foods.set(food.index, food);
         updateCaloriesList();
     }
 
-    public void initGoogleSearch(ArrayList<Food> foods){
+    public void initGoogleSearch(ArrayList<Food> foods) {
         this.foods = foods;
         GoogleSearch search = new GoogleSearch(this);
-        for (Food food : this.foods){
+        for (Food food : this.foods) {
             search.howManyCalories(food);
         }
     }
