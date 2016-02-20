@@ -1,13 +1,17 @@
 package com.example.lenovo.calorify;
 
-import android.graphics.Typeface;
-import android.hardware.Camera;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import net.bozho.easycamera.DefaultEasyCamera;
-import net.bozho.easycamera.EasyCamera;
+import com.example.lenovo.calorify.Utilities.CaloriesListAdapter;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,14 +28,55 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         actions.takePicture(EasyCamera.Callbacks.create().withJpegCallback(callback));*/
-        setTitleTypeface();
+        //setTitleTypeface();
+        populateCaloriesList();
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/brainflower.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
     }
 
-    private void setTitleTypeface(){
-        TextView title = (TextView) findViewById(R.id.sliding_layout_title);
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+
+
+    private void buildCaloriesList(String[] foodNames, String[] calNums){
+        CaloriesListAdapter adapter = new CaloriesListAdapter(MainActivity.this, foodNames, calNums);
+        ListView list = (ListView)findViewById(R.id.caloriesList);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                //do something
+            }
+        });
+
+        togglePanelContent();
+    }
+
+    private void populateCaloriesList(){
+        String[] foodNames = {"salut1", "salut2", "salut3"};
+        String[] calNums = {"100", "200", "300"};
+        buildCaloriesList(foodNames, calNums);
+    }
+
+    private void togglePanelContent(){
         TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/brainflower.ttf");
-        title.setTypeface(font);
-        taskDescription.setTypeface(font);
+        ListView caloriesList = (ListView) findViewById(R.id.caloriesList);
+
+        if (taskDescription.getVisibility() == View.VISIBLE) {
+            taskDescription.setVisibility(View.GONE);
+            caloriesList.setVisibility(View.VISIBLE);
+        }
+        else{
+            taskDescription.setVisibility(View.VISIBLE);
+            caloriesList.setVisibility(View.GONE);
+        }
     }
 }
