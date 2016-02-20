@@ -14,7 +14,7 @@
         fontPath="fonts/quicksand.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="18dp"
         android:text="APPLE"
         android:id="@+id/food_name"
         android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
         android:layout_marginLeft="10dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:textSize="30dp"
+        android:textSize="18dp"
         android:text="120"
         android:id="@+id/cal_num"
         android:layout_alignParentTop="true"
@@ -40,11 +40,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textSize="30dp"
-        android:text="cals"
+        android:textSize="18dp"
+        android:text="cals in"
         android:id="@+id/cal_label"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/cal_num"
         android:textColor="@color/calorify_default" />
+        
+        <TextView
+            fontPath="fonts/quicksand.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="18dp"
+            android:text="120"
+            android:id="@+id/grams_num"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/cal_label"
+            android:background="@color/calorify_default"/>
+
+        <TextView
+            fontPath="fonts/quicksand.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:text="grams"
+            android:id="@+id/gram_label"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/grams_num"
+            android:textColor="@color/calorify_default" />
     </RelativeLayout>
 </RelativeLayout>

@@ -6,6 +6,7 @@ package com.example.lenovo.calorify.Utilities;
 public class Food {
 
     public String name;
-    public String calories;
+    public int calories;
     public int index;
+    public int grams;
 }
