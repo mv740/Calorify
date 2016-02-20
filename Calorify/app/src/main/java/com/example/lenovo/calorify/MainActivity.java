@@ -28,8 +28,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTitleTypeface(){
-        TextView tv = (TextView) findViewById(R.id.sliding_layout_title);
+        TextView title = (TextView) findViewById(R.id.sliding_layout_title);
+        TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/brainflower.ttf");
-        tv.setTypeface(font);
+        title.setTypeface(font);
+        taskDescription.setTypeface(font);
     }
 }
