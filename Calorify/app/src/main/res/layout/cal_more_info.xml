@@ -36,14 +36,20 @@
         android:textColor="@color/calorify_default"
         android:visibility="visible"/>
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:id="@+id/caloriesList"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/sliding_layout_task_description"
             android:layout_alignParentStart="true"
-            android:visibility="gone"/>
+            android:id="@+id/caloriesListContainer"
+            android:visibility="gone">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:id="@+id/caloriesList"/>
+        </ScrollView>
 
 
     </RelativeLayout>
