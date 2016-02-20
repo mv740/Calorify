@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.lenovo.calorify.Utilities.CaloriesListAdapter;
@@ -68,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void togglePanelContent(){
         TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
-        ListView caloriesList = (ListView) findViewById(R.id.caloriesList);
+        ScrollView caloriesListContainer = (ScrollView) findViewById(R.id.caloriesListContainer);
 
         if (taskDescription.getVisibility() == View.VISIBLE) {
             taskDescription.setVisibility(View.GONE);
-            caloriesList.setVisibility(View.VISIBLE);
+            caloriesListContainer.setVisibility(View.VISIBLE);
         }
         else{
             taskDescription.setVisibility(View.VISIBLE);
-            caloriesList.setVisibility(View.GONE);
+            caloriesListContainer.setVisibility(View.GONE);
         }
     }
 }

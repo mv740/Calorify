@@ -2,12 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:gravity="center">
 
     <TextView
+        fontPath="fonts/quicksand.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30dp"
         android:text="APPLE"
         android:id="@+id/food_name"
         android:layout_alignParentTop="true"
@@ -15,12 +22,13 @@
         android:textColor="@color/calorify_default"/>
 
     <TextView
+        fontPath="fonts/quicksand.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="30dp"
         android:text="120"
         android:id="@+id/cal_num"
         android:layout_alignParentTop="true"
@@ -28,13 +36,15 @@
         android:background="@color/calorify_default"/>
 
     <TextView
+        fontPath="fonts/quicksand.ttf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="CAL"
+        android:textSize="30dp"
+        android:text="cals"
         android:id="@+id/cal_label"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/cal_num"
         android:textColor="@color/calorify_default" />
+    </RelativeLayout>
 </RelativeLayout>
