@@ -35,7 +35,7 @@
                 style="@style/Widget.MaterialProgressBar.ProgressBar.Large"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
+                android:layout_marginBottom="3dp"
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
                 android:indeterminate="true"
@@ -49,28 +49,28 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="45dp"
-                android:layout_marginBottom="14dp"
+                android:layout_marginBottom="17dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:text="@string/progress_comment"
                 android:textColor="@color/calorify_default"
                 android:layout_toEndOf="@+id/progress_bar"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:textAlignment="textStart" />
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/sliding_layout_task_description"
+            android:id="@+id/sliding_layout_alert"
             fontPath="fonts/quicksand.ttf"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_margin="10dp"
             android:text="@string/welcome_slideup_text"
             android:textAlignment="center"
             android:textColor="@color/calorify_default"
-            android:textSize="33dp"
-            android:visibility="visible" />
+            android:textSize="15dp" />
 
 
         <ListView
@@ -78,9 +78,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/sliding_layout_task_description"
-            android:layout_marginTop="15dp"
-            android:visibility="gone" />
+            android:layout_below="@+id/sliding_layout_alert"
+            android:layout_alignBottom="@+id/progress_bar_container"/>
 
 
     </RelativeLayout>

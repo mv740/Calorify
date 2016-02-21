@@ -36,7 +36,46 @@
                 android:text="@string/tooltip"
                 android:id="@+id/tooltip"
                 android:gravity="center"/>
+
+            <TextView
+                fontPath="fonts/quicksand.ttf"
+                android:textColor="#FFFFFFFF"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_cal_text_part1"
+                android:id="@+id/total_cal_part1_label"
+                android:layout_margin="3dp"
+                android:layout_below="@+id/tooltip"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                fontPath="fonts/quicksand.ttf"
+                android:textColor="#FFFFFFFF"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:layout_margin="3dp"
+                android:id="@+id/total_cal_num"
+                android:layout_below="@+id/tooltip"
+                android:layout_toEndOf="@+id/total_cal_part1_label" />
+
+            <TextView
+                fontPath="fonts/quicksand.ttf"
+                android:textColor="#FFFFFFFF"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_cal_text_part2"
+                android:id="@+id/total_cal_part2_label"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_alignTop="@+id/total_cal_num"
+                android:layout_toEndOf="@+id/total_cal_num" />
         </RelativeLayout>
+
+
 
         <include layout="@layout/cal_more_info"/>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>

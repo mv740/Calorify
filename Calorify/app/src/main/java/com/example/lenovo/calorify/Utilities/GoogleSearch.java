@@ -46,12 +46,12 @@ public class GoogleSearch {
 
                             food.calories = findCalsInSearchResponse(response);
                             food.grams = findGramsInSearchResponse(response);
-                            activity.updateFoods(food);
+                            activity.panel.updateFoods(food);
 
                             if (isSearchComplete()){
                                 //reset search count
                                 searchCount = 0;
-                                activity.searchIsDone();
+                                activity.panel.searchIsDone();
                             }
 
                             searchCount++;

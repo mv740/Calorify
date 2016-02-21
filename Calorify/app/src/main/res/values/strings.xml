@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Calorify</string>
+    <string name="shared_key_cal_label">cals</string>
     <string name="welcome_slideup_text">Don\'t be shy...Take a picture! We won\'t judge</string>
     <string name="no_result_slideup_text">Maybe you were a bit too enthousiastic. Try one food at a time.</string>
     <string name="tooltip">Click anywhere on the screen to take a picture of your food</string>
     <string name="progress_comment">Loading time proportional to calorie count. You should feel ashamed.</string>
+    <string name="search_slideup_text">Select your food from the results</string>
+
+    <string name="total_cal_text_part1">Keep it going! You\'ve eaten</string>
+    <string name="total_cal_text_part2">cals</string>
 </resources>
