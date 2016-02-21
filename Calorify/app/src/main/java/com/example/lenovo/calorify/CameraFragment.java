@@ -137,7 +137,6 @@ public class CameraFragment extends Fragment {
     public void onPause() {
         if (camera != null) {
             camera.stopPreview();
-            camera.release();
         }
         super.onPause();
     }
