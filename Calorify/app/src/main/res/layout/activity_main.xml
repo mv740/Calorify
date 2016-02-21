@@ -12,6 +12,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                fontPath="fonts/quicksand.ttf"
+                android:textColor="@color/calorify_default"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:background="#FFFFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tooltip"
+                android:id="@+id/tooltip"
+                android:gravity="center|top"/>
         </RelativeLayout>
 
         <include layout="@layout/cal_more_info"/>
