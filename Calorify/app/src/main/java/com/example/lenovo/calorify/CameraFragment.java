@@ -25,9 +25,6 @@ import android.widget.Toast;
 import com.example.lenovo.calorify.MainActivity;
 import com.example.lenovo.calorify.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-//import com.parse.ParseException;
-//import com.parse.ParseFile;
-//import com.parse.SaveCallback;
 
 public class CameraFragment extends Fragment {
 
@@ -119,59 +116,6 @@ public class CameraFragment extends Fragment {
         return v;
     }
 
-    /*
-     * ParseQueryAdapter loads ParseFiles into a ParseImageView at whatever size
-     * they are saved. Since we never need a full-size image in our app, we'll
-     * save a scaled one right away.
-     */
-    private void saveScaledPhoto(byte[] data) {
-
-        // Resize photo from camera byte array
-        Bitmap mealImage = BitmapFactory.decodeByteArray(data, 0, data.length);
-        Bitmap mealImageScaled = Bitmap.createScaledBitmap(mealImage, 200, 200
-                * mealImage.getHeight() / mealImage.getWidth(), false);
-
-        // Override Android default landscape orientation and save portrait
-        Matrix matrix = new Matrix();
-        matrix.postRotate(90);
-        Bitmap rotatedScaledMealImage = Bitmap.createBitmap(mealImageScaled, 0,
-                0, mealImageScaled.getWidth(), mealImageScaled.getHeight(),
-                matrix, true);
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        rotatedScaledMealImage.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-
-        byte[] scaledData = bos.toByteArray();
-
-        // Save the scaled image to Parse
-//        photoFile = new ParseFile("meal_photo.jpg", scaledData);
-//        photoFile.saveInBackground(new SaveCallback() {
-//
-//            public void done(ParseException e) {
-//                if (e != null) {
-//                    Toast.makeText(getActivity(),
-//                            "Error saving: " + e.getMessage(),
-//                            Toast.LENGTH_LONG).show();
-//                } else {
-//                    addPhotoToMealAndReturn(photoFile);
-//                }
-//            }
-//        });
-    }
-
-    /*
-     * Once the photo has saved successfully, we're ready to return to the
-     * NewMealFragment. When we added the CameraFragment to the back stack, we
-     * named it "NewMealFragment". Now we'll pop fragments off the back stack
-     * until we reach that Fragment.
-     */
-//    private void addPhotoToMealAndReturn(ParseFile photoFile) {
-//        ((NewMealActivity) getActivity()).getCurrentMeal().setPhotoFile(
-//                photoFile);
-//        FragmentManager fm = getActivity().getFragmentManager();
-//        fm.popBackStack("NewMealFragment",
-//                FragmentManager.POP_BACK_STACK_INCLUSIVE);
-//    }
 
     @Override
     public void onResume() {
