@@ -10,12 +10,12 @@ import com.example.lenovo.calorify.Utilities.Food;
 import com.example.lenovo.calorify.Utilities.GoogleSearch;
 import com.example.lenovo.calorify.Utilities.ClarifaiManager;
 
-import org.w3c.dom.Text;
-
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
                         .build()
         );
 
+        dbMan.getMostEatenFood();
+
     }
 
 
-    public void test(){
+    public void test() {
         dbMan.persist(new Food("salut"));
     }
 
@@ -55,8 +57,42 @@ public class MainActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    public void displayMostEatenFood(String food) {
 
-    public void updateTotalCals(){
+        setTooltipText(getString(R.string.tooltip_most_eaten) + " " + food);
+
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+
+                        resetTooltipText();
+
+                    }
+                });
+            }
+        }, 10000);
+
+    }
+
+
+
+    private void setTooltipText(String text) {
+        TextView toolTipTV = (TextView) findViewById(R.id.tooltip);
+        toolTipTV.setText(text);
+    }
+
+    public void resetTooltipText() {
+        TextView toolTipTV = (TextView) findViewById(R.id.tooltip);
+        toolTipTV.setText(R.string.tooltip_text);
+    }
+
+
+    public void updateTotalCals() {
         int cals = dbMan.getCalorieCount();
         TextView totalCalsTV = (TextView) findViewById(R.id.total_cal_num);
         totalCalsTV.setText(String.valueOf(cals));

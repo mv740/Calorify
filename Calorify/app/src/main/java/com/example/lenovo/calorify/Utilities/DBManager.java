@@ -47,6 +47,26 @@ public class DBManager {
         queue.add(stringRequest);
     }
 
+    public void getMostEatenFood(){
+       /* String url = "http://calorify.azurewebsites.net/getMostEatenFood";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        mainActivity.displayMostEatenFood(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);*/
+        mainActivity.displayMostEatenFood("apple");
+    }
+
     public void addToCalorieCount(int cals){
         SharedPreferences sharedPref = mainActivity.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

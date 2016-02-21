@@ -93,8 +93,10 @@ public class SlideupPanel {
         if (!foodFound) {
             setSlideupAlert(R.string.no_result_slideup_text);
         }
+        else {
+            setSlideupAlert(R.string.search_slideup_text);
+        }
         setLoadingVisibility(View.GONE);
-        setSlideupAlert(R.string.search_slideup_text);
     }
 
     public void setLoadingVisibility(int visibility) {

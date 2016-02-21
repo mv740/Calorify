@@ -33,7 +33,7 @@
                 android:background="#FFFFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:text="@string/tooltip"
+                android:text="@string/tooltip_text"
                 android:id="@+id/tooltip"
                 android:gravity="center"/>
 
