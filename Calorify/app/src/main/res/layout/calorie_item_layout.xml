@@ -41,11 +41,23 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:textSize="18dp"
-        android:text="cals in"
+        android:text="cals"
         android:id="@+id/cal_label"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/cal_num"
         android:textColor="@color/calorify_default" />
+
+        <TextView
+            fontPath="fonts/quicksand.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18dp"
+            android:text="in"
+            android:id="@+id/in_label"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/cal_label"
+            android:textColor="@color/calorify_default" />
         
         <TextView
             fontPath="fonts/quicksand.ttf"
@@ -58,7 +70,7 @@
             android:text="120"
             android:id="@+id/grams_num"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/cal_label"
+            android:layout_toEndOf="@+id/in_label"
             android:background="@color/calorify_default"/>
 
         <TextView
