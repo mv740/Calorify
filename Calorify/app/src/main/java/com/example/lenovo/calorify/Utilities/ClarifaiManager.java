@@ -27,9 +27,11 @@ import java.util.HashMap;
 public class ClarifaiManager {
 
     private ClarifaiClient client;
+    private MainActivity mainActivity;
 
-    public ClarifaiManager() {
+    public ClarifaiManager(MainActivity mainActivity) {
         client = new ClarifaiClient(Credential.CLIENT_ID, Credential.CLIENT_SECRET);
+        this.mainActivity = mainActivity;
     }
 
     private static final String TAG_C = "Clarifai";
@@ -49,7 +51,7 @@ public class ClarifaiManager {
         return bitmap;
     }
 
-    public void sendImageToClarifai(final MainActivity activity, Bitmap bitmapSelected) {
+    public void sendImageToClarifai(Bitmap bitmapSelected) {
         Log.d("Clarifai", "start");
         new AsyncTask<Bitmap,Void,RecognitionResult>() {
             @Override
@@ -72,7 +74,7 @@ public class ClarifaiManager {
 
                 Log.d(TAG_C,result.getTags().toString());
 
-                activity.initGoogleSearch(foodArrayList);
+                mainActivity.initGoogleSearch(foodArrayList);
 
             }
 

@@ -3,6 +3,8 @@ package com.example.lenovo.calorify;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceHolder;
@@ -64,16 +66,16 @@ public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private ClarifaiClient client;
-    private ClarifaiManager clarifaiManager;
+    public static ClarifaiManager clarifaiManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        clarifaiManager = new ClarifaiManager();
+        clarifaiManager = new ClarifaiManager(this);
 
-        //for testing witout camera
+        //for testing witout camer
         //Bitmap bitmapSelected = clarifaiManager.getBitmapFromAsset(getApplicationContext(), "kitten.jpeg");
 
         //populateCaloriesList();
@@ -84,7 +86,10 @@ public class MainActivity extends AppCompatActivity {
                         .build()
         );
 
-        dispatchTakePictureIntent();
+        Fragment camera =  getSupportFragmentManager().findFragmentById(R.id.camera_preview);
+
+
+        //dispatchTakePictureIntent();
 
     }
 
@@ -100,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            clarifaiManager.sendImageToClarifai(this, imageBitmap);
+            clarifaiManager.sendImageToClarifai(imageBitmap);
         }
     }
 
