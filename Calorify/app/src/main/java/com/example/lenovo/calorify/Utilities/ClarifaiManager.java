@@ -53,7 +53,7 @@ public class ClarifaiManager {
     }
 
     public void sendImageToClarifai(Bitmap bitmapSelected) {
-        mainActivity.searchBegins();
+        mainActivity.panel.searchBegins();
 
         Log.d("Clarifai", "start");
         new AsyncTask<Bitmap,Void,RecognitionResult>() {
@@ -68,8 +68,7 @@ public class ClarifaiManager {
                 ArrayList<Food> foodArrayList = new ArrayList<>();
                 for (Tag tag :result.getTags())
                 {
-                    Food newFood = new Food();
-                    newFood.name = tag.getName();
+                    Food newFood = new Food(tag.getName());
                     newFood.index = foodArrayList.size();
                     foodArrayList.add(newFood);
                 }

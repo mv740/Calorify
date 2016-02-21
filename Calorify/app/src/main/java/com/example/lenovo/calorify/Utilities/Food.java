@@ -9,4 +9,8 @@ public class Food {
     public int calories;
     public int index;
     public int grams;
+
+    public Food(String name) {
+        this.name = name;
+    }
 }
