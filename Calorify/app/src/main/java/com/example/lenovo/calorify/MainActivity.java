@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setLoadingVisibility(int visibility){
-        MaterialProgressBar progressBar = (MaterialProgressBar) findViewById(R.id.progress_bar);
-        progressBar.setVisibility(visibility);
+        RelativeLayout progressBarContainer = (RelativeLayout) findViewById(R.id.progress_bar_container);
+        progressBarContainer.setVisibility(visibility);
     }
 }
