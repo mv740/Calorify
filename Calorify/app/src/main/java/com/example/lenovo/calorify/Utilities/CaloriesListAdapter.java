@@ -40,7 +40,17 @@ public class CaloriesListAdapter extends ArrayAdapter<String> {
 
         txtfoodName.setText(foodNames[position]);
         calNum.setText(calNums[position]);
-        gramNum.setText(gramNums[position]);
+
+        if (gramNums[position].equals("0")){
+            gramNum.setVisibility(View.GONE);
+            TextView gramLabel = (TextView) rowView.findViewById(R.id.gram_label);
+            gramLabel.setVisibility(View.GONE);
+            TextView inLabel = (TextView) rowView.findViewById(R.id.in_label);
+            inLabel.setVisibility(View.GONE);
+        }
+        else {
+            gramNum.setText(gramNums[position]);
+        }
         return rowView;
     }
 }

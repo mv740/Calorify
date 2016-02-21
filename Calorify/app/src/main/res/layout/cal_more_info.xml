@@ -24,12 +24,28 @@
         android:layout_below="@+id/sliding_layout_title"
         android:background="#FFFFFFFF">
 
+
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:indeterminate="true"
+            android:tint="@color/calorify_default"
+            android:visibility="gone"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Large"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="7dp" />
+
     <TextView
+        fontPath="fonts/quicksand.ttf"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="40dp"
-        android:text="Don&apos;t be shy...Take a picture! We won&apos;t judge"
+        android:text="@string/welcome_slideup_text"
         android:id="@+id/sliding_layout_task_description"
         android:textAlignment="center"
         android:layout_centerHorizontal="true"

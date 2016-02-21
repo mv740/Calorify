@@ -47,6 +47,7 @@ import net.bozho.easycamera.EasyCamera;
 
 import java.io.IOException;
 
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     SurfaceView surface;
     SurfaceHolder holder;
     public ArrayList<Food> foods;
+    public boolean doneLoading = false;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private ClarifaiClient client;
@@ -128,14 +130,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        displayCaloriesList();
+        setCaloriesListVisibility(View.VISIBLE);
     }
 
-    private void displayCaloriesList() {
+    private void setCaloriesListVisibility(int visibility) {
         TextView taskDescription = (TextView) findViewById(R.id.sliding_layout_task_description);
         ListView caloriesListContainer = (ListView) findViewById(R.id.caloriesList);
-        taskDescription.setVisibility(View.GONE);
-        caloriesListContainer.setVisibility(View.VISIBLE);
+        if (visibility == View.VISIBLE) {
+            taskDescription.setVisibility(View.GONE);
+            caloriesListContainer.setVisibility(View.VISIBLE);
+        }
+        else{
+            taskDescription.setVisibility(View.VISIBLE);
+            caloriesListContainer.setVisibility(View.GONE);
+        }
     }
 
     private void updateCaloriesList() {
@@ -197,5 +205,26 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         actions.takePicture(EasyCamera.Callbacks.create().withJpegCallback(callback));
+    }
+
+
+    public void searchIsDone(){
+        boolean foodFound = false;
+        for (Food food: foods){
+            if (food.calories>0)
+                foodFound=true;
+        }
+
+        if (!foodFound){
+            setCaloriesListVisibility(View.GONE);
+            TextView alert = (TextView) findViewById(R.id.sliding_layout_task_description);
+            alert.setText(R.string.no_result_slideup_text);
+        }
+        setLoadingVisibility(View.GONE);
+    }
+
+    public void setLoadingVisibility(int visibility){
+        MaterialProgressBar progressBar = (MaterialProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setVisibility(visibility);
     }
 }

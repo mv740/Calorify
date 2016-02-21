@@ -2,6 +2,7 @@ package com.example.lenovo.calorify.Utilities;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,17 +19,23 @@ import java.util.ArrayList;
  */
 public class GoogleSearch {
 
+    private int searchCount;
+
     private RequestQueue queue;
     private MainActivity activity;
 
     public GoogleSearch(MainActivity activity){
         queue = Volley.newRequestQueue((Activity)activity);
         this.activity = activity;
+        searchCount = 0;
     }
 
 
 
     public void howManyCalories(final Food food) {
+
+        activity.setLoadingVisibility(View.VISIBLE);
+
         //to make it compatible with web parameters
         String toSearch = food.name.replaceAll(" ", "+");
             String url = "https://www.google.ca/search?site=webhp&source=hp&q=how+many+calories+in+" + toSearch;
@@ -38,13 +45,17 @@ public class GoogleSearch {
                         @Override
                         public void onResponse(String response) {
 
-                            if (food.name.equals("cola")){
-                                Log.v("","");
-                            }
                             food.calories = findCalsInSearchResponse(response);
                             food.grams = findGramsInSearchResponse(response);
                             activity.updateFoods(food);
 
+                            if (isSearchComplete()){
+                                //reset search count
+                                searchCount = 0;
+                                activity.searchIsDone();
+                            }
+
+                            searchCount++;
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -55,6 +66,10 @@ public class GoogleSearch {
 // Add the request to the RequestQueue.
             queue.add(stringRequest);
         }
+
+    private boolean isSearchComplete() {
+        return searchCount+1 == activity.foods.size();
+    }
 
 
     private int findCalsInSearchResponse(String response){
