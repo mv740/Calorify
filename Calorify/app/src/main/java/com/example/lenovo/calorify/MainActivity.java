@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
             caloriesListContainer.setVisibility(View.VISIBLE);
         }
         else{
+            taskDescription.setVisibility(View.VISIBLE);
+            caloriesListContainer.setVisibility(View.GONE);
         }
     }
 
@@ -200,6 +202,21 @@ public class MainActivity extends AppCompatActivity {
         actions.takePicture(EasyCamera.Callbacks.create().withJpegCallback(callback));
     }
 
+
+    public void searchIsDone(){
+        boolean foodFound = false;
+        for (Food food: foods){
+            if (food.calories>0)
+                foodFound=true;
+        }
+
+        if (!foodFound){
+            setCaloriesListVisibility(View.GONE);
+            TextView alert = (TextView) findViewById(R.id.sliding_layout_task_description);
+            alert.setText(R.string.no_result_slideup_text);
+        }
+        setLoadingVisibility(View.GONE);
+    }
 
     public void setLoadingVisibility(int visibility){
         MaterialProgressBar progressBar = (MaterialProgressBar) findViewById(R.id.progress_bar);

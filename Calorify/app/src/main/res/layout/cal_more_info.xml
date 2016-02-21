@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textSize="40dp"
-        android:text="Don&apos;t be shy...Take a picture! We won&apos;t judge"
+        android:text="@string/welcome_slideup_text"
         android:id="@+id/sliding_layout_task_description"
         android:textAlignment="center"
         android:layout_centerHorizontal="true"

@@ -45,9 +45,6 @@ public class GoogleSearch {
                         @Override
                         public void onResponse(String response) {
 
-                            if (food.name.equals("cola")){
-                                Log.v("","");
-                            }
                             food.calories = findCalsInSearchResponse(response);
                             food.grams = findGramsInSearchResponse(response);
                             activity.updateFoods(food);
@@ -55,7 +52,7 @@ public class GoogleSearch {
                             if (isSearchComplete()){
                                 //reset search count
                                 searchCount = 0;
-                                activity.setLoadingVisibility(View.GONE);
+                                activity.searchIsDone();
                             }
 
                             searchCount++;
