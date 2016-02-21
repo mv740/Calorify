@@ -37,6 +37,7 @@ public class GoogleSearch {
         //to make it compatible with web parameters
         String toSearch = food.name.replaceAll(" ", "+");
             String url = "https://www.google.ca/search?site=webhp&source=hp&q=how+many+calories+in+" + toSearch;
+        Log.v("FOODNAME",food.name);
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
