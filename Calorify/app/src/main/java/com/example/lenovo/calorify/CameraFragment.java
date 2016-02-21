@@ -1,4 +1,4 @@
-package com.example.lenovo.calorify.Utilities;
+package com.example.lenovo.calorify;
 
 
 import java.io.ByteArrayOutputStream;
@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.lenovo.calorify.MainActivity;
 import com.example.lenovo.calorify.R;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 //import com.parse.ParseException;
 //import com.parse.ParseFile;
 //import com.parse.SaveCallback;
@@ -33,29 +34,26 @@ public class CameraFragment extends Fragment {
 
     private Camera camera;
     private SurfaceView surfaceView;
-    //private ParseFile photoFile;
-    private ImageButton photoButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_camera, parent, false);
-
-        photoButton = (ImageButton) v.findViewById(R.id.camera_photo_button);
+        surfaceView = (SurfaceView) v.findViewById(R.id.camera_surface_view);
 
         if (camera == null) {
             try {
                 camera = Camera.open();
-                photoButton.setEnabled(true);
+                surfaceView.setEnabled(true);
             } catch (Exception e) {
                 Log.e(TAG, "No camera with exception: " + e.getMessage());
-                photoButton.setEnabled(false);
+                surfaceView.setEnabled(false);
                 Toast.makeText(getActivity(), "No camera detected",
                         Toast.LENGTH_LONG).show();
             }
         }
 
-        photoButton.setOnClickListener(new View.OnClickListener() {
+        surfaceView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -74,7 +72,8 @@ public class CameraFragment extends Fragment {
 
                     @Override
                     public void onPictureTaken(byte[] data, Camera camera) {
-                       // saveScaledPhoto(data);
+                        SlidingUpPanelLayout layout = (SlidingUpPanelLayout) getActivity().findViewById(R.id.sliding_layout);
+                        layout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
                         BitmapFactory.Options options = new BitmapFactory.Options();
                         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
                         MainActivity.clarifaiManager.sendImageToClarifai(bitmap);
@@ -85,7 +84,7 @@ public class CameraFragment extends Fragment {
             }
         });
 
-        surfaceView = (SurfaceView) v.findViewById(R.id.camera_surface_view);
+
         SurfaceHolder holder = surfaceView.getHolder();
         holder.addCallback(new Callback() {
 
@@ -175,10 +174,10 @@ public class CameraFragment extends Fragment {
         if (camera == null) {
             try {
                 camera = Camera.open();
-                photoButton.setEnabled(true);
+                surfaceView.setEnabled(true);
             } catch (Exception e) {
                 Log.i(TAG, "No camera: " + e.getMessage());
-                photoButton.setEnabled(false);
+                surfaceView.setEnabled(false);
                 Toast.makeText(getActivity(), "No camera detected",
                         Toast.LENGTH_LONG).show();
             }

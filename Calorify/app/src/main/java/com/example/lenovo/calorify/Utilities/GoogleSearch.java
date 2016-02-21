@@ -34,8 +34,6 @@ public class GoogleSearch {
 
     public void howManyCalories(final Food food) {
 
-        activity.setLoadingVisibility(View.VISIBLE);
-
         //to make it compatible with web parameters
         String toSearch = food.name.replaceAll(" ", "+");
             String url = "https://www.google.ca/search?site=webhp&source=hp&q=how+many+calories+in+" + toSearch;

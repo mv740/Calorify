@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
@@ -52,6 +53,8 @@ public class ClarifaiManager {
     }
 
     public void sendImageToClarifai(Bitmap bitmapSelected) {
+        mainActivity.searchBegins();
+
         Log.d("Clarifai", "start");
         new AsyncTask<Bitmap,Void,RecognitionResult>() {
             @Override

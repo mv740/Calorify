@@ -208,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void searchBegins(){
+        setLoadingVisibility(View.VISIBLE);
+        setCaloriesListVisibility(View.VISIBLE);
+    }
+
     public void searchIsDone(){
         boolean foodFound = false;
         for (Food food: foods){

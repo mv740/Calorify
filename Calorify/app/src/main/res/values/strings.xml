@@ -2,5 +2,5 @@
     <string name="app_name">Calorify</string>
     <string name="welcome_slideup_text">Don\'t be shy...Take a picture! We won\'t judge</string>
     <string name="no_result_slideup_text">Don\'t try to fool me! There is no food in there</string>
-    <string name="tooltip">Take pictures of your food by using the volume buttons</string>
+    <string name="tooltip">Click anywhere on the screen to take a picture of your food</string>
 </resources>
