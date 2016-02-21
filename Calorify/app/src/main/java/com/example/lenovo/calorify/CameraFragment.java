@@ -3,6 +3,7 @@ package com.example.lenovo.calorify;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.Policy;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -44,6 +45,9 @@ public class CameraFragment extends Fragment {
         if (camera == null) {
             try {
                 camera = Camera.open();
+                Camera.Parameters p = camera.getParameters();
+                p.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+                camera.setParameters(p);
                 surfaceView.setEnabled(true);
             } catch (Exception e) {
                 Log.e(TAG, "No camera with exception: " + e.getMessage());
@@ -65,6 +69,7 @@ public class CameraFragment extends Fragment {
                     public void onShutter() {
                         // nothing to do
                         camera.enableShutterSound(true);
+
 
                     }
 
