@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.example.lenovo.calorify"
+        applicationId "com.SuperCoderPlaymates.app.calorify"
         minSdkVersion 18
         targetSdkVersion 23
         versionCode 1
@@ -24,6 +24,7 @@ dependencies {
     compile 'net.bozho.easycamera:easycamera:0.0.1:aar@aar'
     compile 'com.sothree.slidinguppanel:library:3.2.1'
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'

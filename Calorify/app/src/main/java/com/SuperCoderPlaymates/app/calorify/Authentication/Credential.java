@@ -1,4 +1,4 @@
-package com.example.lenovo.calorify.Authentication;
+package com.SuperCoderPlaymates.app.calorify.Authentication;
 
 /**
  * Created by michal on 2/20/2016.

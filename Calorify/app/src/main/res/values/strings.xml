@@ -4,4 +4,6 @@
     <string name="no_result_slideup_text">Don\'t try to fool me! There is no food in there</string>
     <string name="tooltip">Click anywhere on the screen to take a picture of your food</string>
     <string name="progress_comment">Loading time proportional to calorie count. You should feel ashamed.</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

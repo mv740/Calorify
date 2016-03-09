@@ -1,62 +1,46 @@
-package com.example.lenovo.calorify;
+package com.SuperCoderPlaymates.app.calorify;
 
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.hardware.Camera;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 
 
 import com.clarifai.api.ClarifaiClient;
-import com.clarifai.api.RecognitionRequest;
-import com.clarifai.api.RecognitionResult;
-import com.clarifai.api.Tag;
-import com.clarifai.api.exception.ClarifaiException;
-import com.example.lenovo.calorify.Authentication.Credential;
 
 import net.bozho.easycamera.DefaultEasyCamera;
 import net.bozho.easycamera.EasyCamera;
 
-
-import com.example.lenovo.calorify.Utilities.CaloriesListAdapter;
-import com.example.lenovo.calorify.Utilities.Food;
-import com.example.lenovo.calorify.Utilities.GoogleSearch;
-import com.example.lenovo.calorify.Utilities.ClarifaiManager;
-
-import net.bozho.easycamera.DefaultEasyCamera;
-import net.bozho.easycamera.EasyCamera;
+import com.SuperCoderPlaymates.app.calorify.Utilities.CaloriesListAdapter;
+import com.SuperCoderPlaymates.app.calorify.Utilities.Food;
+import com.SuperCoderPlaymates.app.calorify.Utilities.GoogleSearch;
+import com.SuperCoderPlaymates.app.calorify.Utilities.ClarifaiManager;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.IOException;
 
-import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Logger;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,8 +75,41 @@ public class MainActivity extends AppCompatActivity {
         Fragment camera =  getSupportFragmentManager().findFragmentById(R.id.camera_preview);
 
 
-        //dispatchTakePictureIntent();
+        String android_id = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String deviceId = md5(android_id).toUpperCase();
+        AdRequest adRequest = new AdRequest.Builder()     // All emulators
+                .addTestDevice(deviceId)  // An example device ID
+                .build();
 
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        //AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+    }
+
+    public static final String md5(final String s) {
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance("MD5");
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < messageDigest.length; i++) {
+                String h = Integer.toHexString(0xFF & messageDigest[i]);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            Log.v(e.getMessage(), e.getLocalizedMessage());
+        }
+        return "";
     }
 
     private void dispatchTakePictureIntent() {

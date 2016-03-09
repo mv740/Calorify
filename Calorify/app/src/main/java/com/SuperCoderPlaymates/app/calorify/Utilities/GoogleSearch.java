@@ -1,18 +1,14 @@
-package com.example.lenovo.calorify.Utilities;
+package com.SuperCoderPlaymates.app.calorify.Utilities;
 
 import android.app.Activity;
-import android.util.Log;
-import android.view.View;
 
+import com.SuperCoderPlaymates.app.calorify.MainActivity;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.lenovo.calorify.MainActivity;
-
-import java.util.ArrayList;
 
 /**
  * Created by Lenovo on 2/20/2016.

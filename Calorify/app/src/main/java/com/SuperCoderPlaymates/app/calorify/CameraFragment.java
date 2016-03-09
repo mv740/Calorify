@@ -1,15 +1,11 @@
-package com.example.lenovo.calorify;
+package com.SuperCoderPlaymates.app.calorify;
 
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.security.Policy;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +15,9 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.lenovo.calorify.MainActivity;
-import com.example.lenovo.calorify.R;
+import com.SuperCoderPlaymates.app.calorify.R;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 public class CameraFragment extends Fragment {
@@ -39,20 +33,7 @@ public class CameraFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_camera, parent, false);
         surfaceView = (SurfaceView) v.findViewById(R.id.camera_surface_view);
 
-        if (camera == null) {
-            try {
-                camera = Camera.open();
-                Camera.Parameters p = camera.getParameters();
-                p.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
-                camera.setParameters(p);
-                surfaceView.setEnabled(true);
-            } catch (Exception e) {
-                Log.e(TAG, "No camera with exception: " + e.getMessage());
-                surfaceView.setEnabled(false);
-                Toast.makeText(getActivity(), "No camera detected",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
+        prepareCamera();
 
         surfaceView.setOnClickListener(new View.OnClickListener() {
 
@@ -120,17 +101,7 @@ public class CameraFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (camera == null) {
-            try {
-                camera = Camera.open();
-                surfaceView.setEnabled(true);
-            } catch (Exception e) {
-                Log.i(TAG, "No camera: " + e.getMessage());
-                surfaceView.setEnabled(false);
-                Toast.makeText(getActivity(), "No camera detected",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
+        prepareCamera();
     }
 
     @Override
@@ -138,8 +109,27 @@ public class CameraFragment extends Fragment {
         if (camera != null) {
             camera.stopPreview();
             camera.release();
+            camera = null;
         }
         super.onPause();
+    }
+
+    private void prepareCamera(){
+
+        if (camera == null) {
+            try {
+                camera = Camera.open();
+                Camera.Parameters p = camera.getParameters();
+                p.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+                camera.setParameters(p);
+                surfaceView.setEnabled(true);
+            } catch (Exception e) {
+                Log.e(TAG, "No camera with exception: " + e.getMessage());
+                surfaceView.setEnabled(false);
+                Toast.makeText(getActivity(), "No camera detected",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }

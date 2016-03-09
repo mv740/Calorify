@@ -1,4 +1,4 @@
-package com.example.lenovo.calorify.Utilities;
+package com.SuperCoderPlaymates.app.calorify.Utilities;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,9 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.lenovo.calorify.R;
-
-import java.util.ArrayList;
+import com.SuperCoderPlaymates.app.calorify.R;
 
 /**
  * Created by NSPACE on 2016-02-09.

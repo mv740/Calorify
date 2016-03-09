@@ -1,4 +1,4 @@
-package com.example.lenovo.calorify;
+package com.SuperCoderPlaymates.app.calorify;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

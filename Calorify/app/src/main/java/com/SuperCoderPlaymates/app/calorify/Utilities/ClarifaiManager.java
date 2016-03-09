@@ -1,4 +1,4 @@
-package com.example.lenovo.calorify.Utilities;
+package com.SuperCoderPlaymates.app.calorify.Utilities;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -6,21 +6,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
+import com.SuperCoderPlaymates.app.calorify.Authentication.Credential;
+import com.SuperCoderPlaymates.app.calorify.MainActivity;
 import com.clarifai.api.ClarifaiClient;
 import com.clarifai.api.RecognitionRequest;
 import com.clarifai.api.RecognitionResult;
 import com.clarifai.api.Tag;
 import com.clarifai.api.exception.ClarifaiException;
-import com.example.lenovo.calorify.Authentication.Credential;
-import com.example.lenovo.calorify.MainActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by michal on 2/20/2016.
